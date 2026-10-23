@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <title>Aria Bagherzadeh – Django developer</title>
+    <meta name="description" content="Portfolio of Aria Bagherzadeh, a Django and Python developer interested in backend, web and Android development.">
+    <meta name="color-scheme" content="dark">
+    <meta name="theme-color" content="#092E20">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root{
+            --brand:#092E20;      /* Django green: hero, contact, key surfaces */
+            --accent:#44b78b;     /* lighter Django green: links, active states, focus */
+            --bg:#111312;         /* neutral dark base */
+            --surface:#181b1a;
+            --line:#2a2f2d;
+            --text:#e9ecea;
+            --muted:#9aa5a0;
+            --on-brand-muted:#aac7b8;
+            --gutter:clamp(16px,5vw,40px);
+            --nav-h:64px;
+            color-scheme:dark;
+        }
+        *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+        html{scroll-behavior:smooth;scroll-padding-top:calc(var(--nav-h) + 12px);-webkit-text-size-adjust:100%;text-size-adjust:100%}
+        body{font-family:'Inter',system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;background:var(--bg);color:var(--text);line-height:1.65;font-size:clamp(16px,1.05vw + 12px,18px);-webkit-font-smoothing:antialiased;overflow-x:hidden;-webkit-tap-highlight-color:transparent}
+        img{max-width:100%;display:block}
+        a{color:inherit;text-decoration:none}
+        :focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:4px}
+        .skip{position:absolute;left:-999px;top:8px;background:var(--accent);color:#06221a;padding:8px 14px;border-radius:6px;font-weight:600;z-index:100}
+        .skip:focus{left:8px}
+        .wrap{width:min(1160px,calc(100% - 2*var(--gutter)));margin-inline:auto}
+        @supports(padding:max(0px)){
+            .wrap{width:min(1160px,calc(100% - 2*max(var(--gutter),env(safe-area-inset-left),env(safe-area-inset-right))))}
+        }
+
+        /* navbar */
+        header{position:sticky;top:0;z-index:50;background:rgba(17,19,18,.88);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);border-bottom:1px solid var(--line);padding-top:env(safe-area-inset-top)}
+        .bar{display:flex;align-items:center;height:var(--nav-h)}
+        .bar nav{margin-left:auto}
+        .logo{font-weight:800;font-size:1.15rem;letter-spacing:-.02em;min-height:44px;display:flex;align-items:center}
+        #menu{display:flex;gap:4px;list-style:none}
+        #menu a{display:flex;align-items:center;min-height:44px;padding:0 14px;color:var(--muted);font-weight:500;font-size:.95rem;border-radius:8px;transition:color .15s,background .15s}
+        #menu a:hover{color:var(--text);background:rgba(255,255,255,.05)}
+        #menu a.active{color:var(--text);box-shadow:inset 0 -2px 0 var(--accent);border-radius:8px 8px 0 0}
+        .toggle{display:none;margin-left:auto;width:44px;height:44px;background:none;border:1px solid var(--line);border-radius:10px;color:var(--text);cursor:pointer;align-items:center;justify-content:center;flex-direction:column;gap:5px}
+        .toggle span{display:block;width:18px;height:2px;background:currentColor;border-radius:2px;transition:transform .2s,opacity .2s}
+        .toggle[aria-expanded="true"] span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+        .toggle[aria-expanded="true"] span:nth-child(2){opacity:0}
+        .toggle[aria-expanded="true"] span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+
+        /* hero */
+        .hero{min-height:calc(100vh - var(--nav-h));min-height:calc(100svh - var(--nav-h));display:flex;align-items:center;background:linear-gradient(180deg,var(--brand) 0%,#0b2219 55%,var(--bg) 100%);border-bottom:1px solid var(--line)}
+        .hero .wrap{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(0,1fr);gap:clamp(32px,6vw,72px);align-items:center;padding-block:clamp(48px,9vw,120px)}
+        .hero h1{font-size:clamp(2.4rem,8vw,5.2rem);font-weight:800;letter-spacing:-.05em;line-height:.98;overflow-wrap:anywhere}
+        .lead{margin-top:clamp(16px,2.5vw,26px);max-width:34ch;font-size:clamp(1.05rem,2.4vw,1.45rem);line-height:1.45;color:#d3e5db;font-weight:500}
+        .actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:clamp(24px,4vw,36px)}
+        .btn{display:inline-flex;align-items:center;justify-content:center;min-height:46px;padding:0 22px;border-radius:12px;font-weight:600;font-size:.97rem;border:1px solid transparent;transition:background .2s,border-color .2s;text-align:center}
+        .btn.primary{background:var(--accent);color:#06221a}
+        .btn.primary:hover{background:#6bd0a8}
+        .btn.ghost{border-color:rgba(170,199,184,.45);color:#e4efe9}
+        .btn.ghost:hover{background:rgba(255,255,255,.07)}
+        .card{background:rgba(17,19,18,.55);border:1px solid rgba(170,199,184,.22);border-radius:18px;padding:clamp(20px,3vw,32px);display:flex;flex-direction:column;align-items:flex-start;gap:16px}
+        .avatar{width:clamp(80px,14vw,112px);aspect-ratio:1;border-radius:50%;border:2px solid rgba(68,183,139,.6);object-fit:cover;background:var(--brand)}
+        .card strong{font-size:1.1rem;display:block;line-height:1.3}
+        .card small{color:var(--on-brand-muted);font-size:.92rem}
+        .links{display:flex;flex-direction:column;gap:6px;width:100%}
+        .links a{display:flex;align-items:center;min-height:44px;padding:0 12px;border-radius:10px;border:1px solid rgba(170,199,184,.2);font-weight:500;font-size:.95rem;transition:background .2s,border-color .2s}
+        .links a:hover{border-color:var(--accent);background:rgba(68,183,139,.1)}
+
+        /* sections */
+        section{min-height:calc(100vh - var(--nav-h));min-height:calc(100svh - var(--nav-h));display:flex;align-items:center;padding-block:clamp(64px,10vw,128px)}
+        section>.wrap{margin-inline:auto}
+        h2{font-size:clamp(1.55rem,3.6vw,2.4rem);font-weight:800;letter-spacing:-.035em;line-height:1.15;margin-bottom:clamp(18px,3vw,28px)}
+        .body{color:var(--muted);max-width:64ch;margin-bottom:14px}
+        .skills{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,220px),1fr));gap:clamp(20px,3vw,32px);margin-top:clamp(24px,4vw,40px)}
+        .skills h3{font-size:.98rem;font-weight:600;margin-bottom:10px}
+        .chips{display:flex;flex-wrap:wrap;gap:8px;list-style:none}
+        .chips li{font-size:.88rem;background:var(--surface);border:1px solid var(--line);padding:4px 12px;border-radius:999px}
+
+        .project{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:8px 24px;padding-block:26px;border-top:1px solid var(--line)}
+        .project:last-of-type{border-bottom:1px solid var(--line)}
+        .project h3{font-size:clamp(1.1rem,2vw,1.25rem);font-weight:600;letter-spacing:-.01em;overflow-wrap:anywhere}
+        .project p{grid-column:1;color:var(--muted);max-width:62ch}
+        .go{grid-column:2;grid-row:1;align-self:start;color:var(--accent);font-weight:600;font-size:.95rem;min-height:44px;display:flex;align-items:center;margin-top:-10px}
+        .go:hover{text-decoration:underline;text-underline-offset:4px}
+        .tags{grid-column:1;display:flex;flex-wrap:wrap;gap:8px;margin-top:4px}
+        .tags span{font-size:.82rem;background:var(--surface);border:1px solid var(--line);padding:2px 10px;border-radius:6px}
+
+
+        .contact{background:var(--brand);border:1px solid #14432f;border-radius:clamp(14px,2vw,22px);padding:clamp(24px,5vw,48px);display:flex;flex-wrap:wrap;gap:24px;justify-content:space-between;align-items:center}
+        .contact h2{margin-bottom:8px}
+        .contact p{color:var(--on-brand-muted);max-width:42ch}
+        footer{padding:28px 0 calc(28px + env(safe-area-inset-bottom));color:var(--muted);font-size:.88rem;border-top:1px solid var(--line)}
+
+        /* tablets */
+        @media(max-width:900px){
+            .hero .wrap{grid-template-columns:1fr}
+            .card{max-width:440px}
+        }
+        /* phones: hamburger menu */
+        @media(max-width:760px){
+            .toggle{display:flex}
+            .bar nav{margin-left:0}
+            #menu{position:absolute;left:0;right:0;top:100%;flex-direction:column;gap:0;background:var(--bg);border-bottom:1px solid var(--line);padding:8px var(--gutter) 14px;display:none}
+            #menu.open{display:flex}
+            #menu a{min-height:48px;font-size:1rem}
+            #menu a.active{box-shadow:none;color:var(--accent);background:rgba(68,183,139,.08);border-radius:8px}
+            .project{grid-template-columns:minmax(0,1fr)}
+            .go{grid-column:1;grid-row:auto;margin-top:0}
+            .actions .btn,.contact .btn{flex:1 1 100%}
+        }
+        /* very small phones */
+        @media(max-width:360px){
+            :root{--gutter:14px}
+            .btn{padding:0 14px}
+        }
+        /* short landscape phones */
+        @media(max-height:480px) and (orientation:landscape){
+            .hero .wrap{padding-block:32px}
+            .hero,section{min-height:0}
+        }
+        /* large and ultrawide screens */
+        @media(min-width:1600px){html{font-size:112.5%}}
+        @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important}}
+    </style>
+</head>
+<body>
+<a class="skip" href="#about">Skip to content</a>
+
+<header>
+    <div class="wrap bar">
+        <a class="logo" href="#top" aria-label="Aria Bagherzadeh, back to top">Aria</a>
+        <button class="toggle" id="toggle" aria-expanded="false" aria-controls="menu" aria-label="Menu"><span></span><span></span><span></span></button>
+        <nav aria-label="Main">
+            <ul id="menu">
+                <li><a href="#about">About</a></li>
+                <li><a href="#skills">Skills</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </div>
+</header>
+
+<main id="top">
+    <div class="hero">
+        <div class="wrap">
+            <div>
+                <h1>Aria Bagherzadeh</h1>
+                <p class="lead">I build web backends with Django and Python, and I like exploring everything from Android apps to Arduino.</p>
+                <div class="actions">
+                    <a class="btn primary" href="#projects">See my projects</a>
+                    <a class="btn ghost" href="#contact">Get in touch</a>
+                </div>
+            </div>
+            <aside class="card" aria-label="Profile links">
+                <img class="avatar" src="https://github.com/bagherzadeharia.png?size=224" alt="Portrait of Aria Bagherzadeh" width="112" height="112" onerror="this.style.display='none'">
+                <div><strong>Aria Bagherzadeh</strong><small>Django and Python developer</small></div>
+                <div class="links">
+                    <a href="https://github.com/bagherzadeharia" target="_blank" rel="noopener">GitHub</a>
+                    <a href="https://www.linkedin.com/in/bagherzadeharia" target="_blank" rel="noopener">LinkedIn</a>
+                    <a href="https://t.me/bagherzadeharia" target="_blank" rel="noopener">Telegram</a>
+                </div>
+            </aside>
+        </div>
+    </div>
+
+    <section id="about">
+        <div class="wrap">
+            <h2>About me</h2>
+            <p class="body">I'm Aria, a tech enthusiast working toward a career in backend development. I'm interested in Python, web development and Django, and I'm also fond of Android programming.</p>
+            <p class="body">My projects include event and ticket booking with payments, a to-do app, and a blog with email login, all in Django. I also like building things outside the web: a genetic-algorithm solver, an AI course project, and a scientific calculator on Arduino.</p>
+        </div>
+    </section>
+
+    <section id="skills">
+        <div class="wrap">
+            <h2>Skills</h2>
+            <div class="skills" style="margin-top:0">
+                <div><h3>Backend</h3><ul class="chips"><li>Python</li><li>Django</li><li>Jinja</li><li>PostgreSQL</li><li>SQLite</li><li>Nginx</li><li>Docker</li></ul></div>
+                <div><h3>Languages</h3><ul class="chips"><li>C</li><li>C++</li><li>Dart</li><li>Kotlin</li><li>JavaScript</li><li>Bash</li></ul></div>
+                <div><h3>Frontend and design</h3><ul class="chips"><li>HTML5</li><li>CSS3</li><li>Figma</li><li>Canva</li></ul></div>
+                <div><h3>Mobile and embedded</h3><ul class="chips"><li>Flutter</li><li>Gradle</li><li>Arduino</li></ul></div>
+                <div><h3>Automation</h3><ul class="chips"><li>Selenium</li></ul></div>
+            </div>
+        </div>
+    </section>
+
+    <section id="projects">
+        <div class="wrap">
+            <h2>Projects</h2>
+            <article class="project">
+                <h3>ElmofEvent</h3>
+                <a class="go" href="https://github.com/bagherzadeharia/ElmofEvent" target="_blank" rel="noopener">View on GitHub</a>
+                <p>A Django web application for managing events, ticket reservations, users and payments.</p>
+                <div class="tags"><span>Django</span><span>Reservations</span><span>Payments</span></div>
+            </article>
+            <article class="project">
+                <h3>megakit</h3>
+                <a class="go" href="https://github.com/bagherzadeharia/megakit" target="_blank" rel="noopener">View on GitHub</a>
+                <p>A website with a blog and email login, built with Django as an educational project for a basic Django course.</p>
+                <div class="tags"><span>Django</span><span>Blog</span><span>Email login</span></div>
+            </article>
+            <article class="project">
+                <h3>Django-To-Do-App</h3>
+                <a class="go" href="https://github.com/bagherzadeharia/Django-To-Do-App" target="_blank" rel="noopener">View on GitHub</a>
+                <p>A small to-do list web app built with Django.</p>
+                <div class="tags"><span>Django</span><span>JavaScript</span></div>
+            </article>
+            <article class="project">
+                <h3>calculator_arduino</h3>
+                <a class="go" href="https://github.com/bagherzadeharia/calculator_arduino" target="_blank" rel="noopener">View on GitHub</a>
+                <p>A scientific calculator implemented on Arduino Uno, simulated in Proteus.</p>
+                <div class="tags"><span>C++</span><span>Arduino Uno</span><span>Proteus</span></div>
+            </article>
+            <article class="project">
+                <h3>AI_Project</h3>
+                <a class="go" href="https://github.com/bagherzadeharia/AI_Project" target="_blank" rel="noopener">View on GitHub</a>
+                <p>Final project for a university course on the basics and applications of artificial intelligence.</p>
+                <div class="tags"><span>Jupyter Notebook</span><span>AI</span></div>
+            </article>
+            <article class="project">
+                <h3>8-Queens-Genetic-Algorithm</h3>
+                <a class="go" href="https://github.com/bagherzadeharia/8-Queens-Genetic-Algorithm" target="_blank" rel="noopener">View on GitHub</a>
+                <p>A genetic algorithm that solves the 8-queens puzzle.</p>
+                <div class="tags"><span>Jupyter Notebook</span><span>Genetic algorithm</span></div>
+            </article>
+        </div>
+    </section>
+
+    <section id="contact">
+        <div class="wrap">
+            <div class="contact">
+                <div>
+                    <h2>Let's talk</h2>
+                    <p>Have a Django project to build or an opportunity to discuss? Reach out on LinkedIn or Telegram.</p>
+                </div>
+                <div class="actions" style="margin-top:0">
+                    <a class="btn primary" href="https://www.linkedin.com/in/bagherzadeharia" target="_blank" rel="noopener">LinkedIn</a>
+                    <a class="btn ghost" href="https://t.me/bagherzadeharia" target="_blank" rel="noopener">Telegram</a>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+
+<footer><div class="wrap"><span id="year"></span> Aria Bagherzadeh</div></footer>
+
+<script>
+    const USERNAME = "bagherzadeharia";
+    document.getElementById("year").textContent = "© " + new Date().getFullYear();
+
+    function el(tag, cls, text){const n=document.createElement(tag);if(cls)n.className=cls;if(text)n.textContent=text;return n}
+
+    /* mobile menu */
+    const toggle = document.getElementById("toggle"), menu = document.getElementById("menu");
+    function setMenu(open){toggle.setAttribute("aria-expanded", open);menu.classList.toggle("open", open)}
+    toggle.addEventListener("click", () => setMenu(toggle.getAttribute("aria-expanded") !== "true"));
+    menu.addEventListener("click", e => {if(e.target.closest("a")) setMenu(false)});
+    document.addEventListener("keydown", e => {if(e.key === "Escape") setMenu(false)});
+    window.matchMedia("(min-width:761px)").addEventListener("change", e => {if(e.matches) setMenu(false)});
+
+    /* highlight current section in the navbar */
+    const links = [...document.querySelectorAll("#menu a")];
+    const map = new Map(links.map(a => [a.getAttribute("href").slice(1), a]));
+    const io = new IntersectionObserver(es => {
+        es.forEach(e => {
+            if(e.isIntersecting){
+                links.forEach(l => {l.classList.remove("active");l.removeAttribute("aria-current")});
+                const a = map.get(e.target.id);if(a){a.classList.add("active");a.setAttribute("aria-current","true")}
+            }
+        });
+    },{rootMargin:"-30% 0px -60% 0px"});
+    map.forEach((_, id) => {const s = document.getElementById(id);if(s) io.observe(s)});
+</script>
+</body>
+</html>
